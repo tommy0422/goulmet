@@ -1,0 +1,37 @@
+{% load static %}
+
+{% block customcss %}
+<link rel="stylesheet" href="{% static 'register/register.css' %}">
+{% endblock customcss %}
+
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <title>ログイン画面</title>
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="logo">
+            <img src="{% static 'img/logo.png' %}">
+        </div>
+        <div class="social-media">
+            <button><a href="#"><i class="fa fa-google "></i> Google</a></button>
+        </div>
+        <form method="POST" action="">{% csrf_token %}
+            <label>Username:</label><br>
+            <input type="text" name='username'>
+            <label>Password:</label><br>
+            <input type="password" name='password'>
+            <input type="submit" value="Log In">
+        </form>
+        <p>Not a Member?<a href="{% url 'register:register' %}">Sign Up Now</a></p>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,125 @@
+body{
+  height: 1015px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 20px;
+    border-radius: 20px;
+  }
+  li {
+    font-size: 23px;
+  }
+  
+  #pending-content, #done-content {
+    display: none;
+  }
+  
+  #pending-button.active, #done-button.active{
+    color: #ffffff;
+    background-color: orange;
+  }
+  
+  #pending-content.active, #done-content.active {
+    display: block;
+  }
+
+.change{
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    justify-content: space-evenly;
+}
+
+.icon{
+    display: flex;
+    justify-content: center;
+}
+
+#id_icon{
+    position: absolute;
+    margin-right: 160px;
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    opacity: 0.01%;
+}
+
+.icon img{
+    border-radius: 50%;
+    width: 160px;
+    height: 160px;
+}
+
+button a {
+    text-decoration: none;
+    color: #fff;
+  }
+  
+  button:hover {
+    background: rgba(0, 0, 0, 0.6);
+  }
+  
+  .fa {
+    font-size: 1.3em;
+    font-weight: bold;
+  }
+  
+  form {
+      padding-top: 30px;
+      padding-right: 30px;
+      padding-left: 30px;
+  }
+  
+  input[type=text],
+  input[type=email],
+  input[type=submit] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    font-size: 17px;
+    border-radius: 5px;
+    outline: none;
+    border: 2px solid gray;
+  }
+  
+  label {
+    font-size: 20px;
+    font-weight: bold;
+  }
+  
+  input[type=submit] {
+    background: red;
+    border: none;
+    color: #fff;
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 20px;
+    padding: 15px;
+    carsor: pointer;
+  }
+
+  .logout{
+      padding-right: 30px;
+      padding-left: 30px;
+  }
+
+  .pass_change{
+      padding-right: 30px;
+      padding-left: 30px;
+  }
+
+  .pay{
+      padding-right: 30px;
+      padding-left: 30px;
+  }
+  
+  input[type=submit]:hover {
+    background: orange;
+  }
+  
+  p a {
+    text-align: none;
+    font-weight: bold;
+  }
+

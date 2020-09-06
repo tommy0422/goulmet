@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block customcss %}
+<link rel="stylesheet" href="{% static 'account/user_info.css' %}">
+{% endblock customcss %}
+
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    {% block content %}
+    {% if user.is_authenticated %}
+    <!-- 切り替えボタン -->
+    <div class="change">
+        <button id="done-button">Goulmet</button>
+        <button id="pending-button">User</button>
+    </div>
+    <!-- User情報 -->
+    <div id="pending-content">
+        <form method="POST" enctype="multipart/form-data">{% csrf_token %}
+            <div class="icon">
+                {% if user.icon %}
+                <img src="{{user.icon.url}}" alt="" id="preview">
+                {% else %}
+                <img src="{% static 'img/no_icon' %}" alt="" id="preview">
+                {% endif %}
+                <input type="file" name="icon" accept="image/*" id="id_icon" capture="camera"
+                    onchange="previewImage(this);">
+            </div>
+            <p>
+                <label for=" id_username">ユーザー名:</label>
+                <input type="text" name="username" value="{{user.username}}" maxlength="150" required=""
+                    id="id_username">
+                <span class="helptext">この項目は必須です。半角アルファベット、半角数字、@/./+/-/_ で150文字以下にしてください。</span>
+            </p>
+            <p>
+                <label for="id_email">メールアドレス:</label>
+                <input type="email" name="email" value="{{user.email}}" maxlength="254" id="id_email">
+            </p>
+            <input type="submit" value="更新する">
+        </form>
+        <div class="pass_change">
+            <a href="{% url 'account:pass_change' %}"><input type="submit" value="パスワード変更"></a>
+        </div>
+        <div class="pay">
+            <a href="#"><input type="submit" value="支払い方法"></a>
+        </div>
+        <div class="logout">
+            <a href="{% url 'account:logout' %}"><input type="submit" value="Log Out"></a>
+        </div>
+    </div>
+    <!-- Goulmet情報 -->
+    <div id="done-content">
+        <li>未完了 1</li>
+        <li>未完了 2</li>
+        <li>未完了 3</li>
+    </div>
+    {% else %}
+    ログインしてください
+    <p><a href="{% url 'register:login' %}">ログイン画面へ</a></p>
+    {% endif %}
+    <script type="text/javascript" src="{% static 'account/user_info.js' %}"></script>
+
+    {% endblock %}
+
+    {% block footer %}
+    {% endblock %}
+</body>
+
+</html>
