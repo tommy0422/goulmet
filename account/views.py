@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, resolve_url
 from django.urls import reverse_lazy
 from django.views.generic import DetailView, UpdateView
 from .forms import UserUpdateForm, MyPasswordChangeForm
@@ -14,6 +14,14 @@ class UserUpdate(UpdateView):
     model = CustomUser
     form_class = UserUpdateForm
     template_name = 'account/user_info.html'
+
+    def get_success_url(self):
+        return resolve_url('account:user_detail', pk=self.kwargs['pk'])
+
+class UserDetail(DetailView):
+    template_name = 'account/user_detail.html'
+    model = CustomUser
+    field = ('icon','username','email')
 
 @login_required
 def logout(request):
