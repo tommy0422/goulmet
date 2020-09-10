@@ -120,6 +120,8 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
 
+STATIC_ROOT = 'https://goulmet.lolipop.io/STATIC_URL'
+
 # 画像の保存先の指定
 MEDIA_ROOT = os.path.join(BASE_DIR, 'icons')
 # 画像のURL
