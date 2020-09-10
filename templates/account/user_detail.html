@@ -20,7 +20,11 @@
         <p>更新に成功しました</p>
     </div>
     <div class="icon">
+        {% if user.icon %} %}
         <img src="{{object.icon.url}}" alt="">
+        {% else %}
+        <img src="{% static 'img/no_icon' %}" alt="" id="preview">
+        {% endif %}
     </div>
     <table>
         <tr>
