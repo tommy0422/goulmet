@@ -1,0 +1,15 @@
+input[type="password" i]{
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    font-size: 17px;
+    border-radius: 5px;
+    outline: none;
+    border: 2px solid gray;
+}
+
+form {
+    padding-top: 30px;
+    padding-right: 30px;
+    padding-left: 30px;
+}
