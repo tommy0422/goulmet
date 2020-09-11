@@ -30,7 +30,7 @@
                 {% if user.icon %}
                 <img src="{{user.icon.url}}" alt="" id="preview">
                 {% else %}
-                <img src="{% static 'img/no_icon' %}" alt="" id="preview">
+                <img src="{% static 'img/no_icon.png' %}" alt="" id="preview">
                 {% endif %}
                 <input type="file" name="icon" accept="image/*" id="id_icon" capture="camera"
                     onchange="previewImage(this);">
