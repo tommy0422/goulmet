@@ -1,10 +1,18 @@
 {% extends "base.html" %}
+{% load static %}
+{% block customcss %}
+<link rel="stylesheet" href="{% static 'additional_option.css' %}">
+{% endblock customcss %}
+
 {% block content %}
-{% if user.is_authenticated %}
-<p>
-    パスワードを変更しました。<br>
-    <a class="btn btn-primary btn-lg" href="{% url 'register:login' %}">ログイン</a>
-</p>
+<form action="" method="POST">{% csrf_token %}
+    <p><label for="id_option">オプション内容:</label> <input type="text" name="option" maxlength="100" required="" id="id_option"></p>
+    <p><label for="id_price">追加料金:</label> <br><input type="number" name="price" required="" id="id_price" style="text-align: right;">円</p>
+    <input type="submit" value="追加">
+    <div class="back">
+        <a href="{% url 'account:option_list' %}">戻る</a>
+    </div>
+</form>
 <nav class="nav">
     <a href="#" id="1" class="nav__link">
         <i class="material-icons nav__icon">search</i>
@@ -22,8 +30,4 @@
         <i class="material-icons nav__icon">person</i>
     </a>
 </nav>
-{% else %}
-ログインしてください
-<p><a href="{% url 'register:login' %}">ログイン画面へ</a></p>
-{% endif %}
 {% endblock %}

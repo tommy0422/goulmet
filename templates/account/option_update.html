@@ -1,23 +1,19 @@
 {% extends "base.html" %}
 {% load static %}
+
 {% block customcss %}
-<link rel="stylesheet" href="{% static 'pass_change.css' %}">
+<link rel="stylesheet" href="{% static 'additional_option.css' %}">
 {% endblock customcss %}
 
 {% block content %}
 {% if user.is_authenticated %}
-<form action="" method="POST">
-    {{ form.non_field_errors }}
-    {% for field in form %}
-    <div class="form-group">
-        <label for="{{ field.id_for_label }}">{{ field.label_tag }}</label>
-        {{ field }}
-        {{ field.errors }}
+<form action="" method="POST">{% csrf_token %}
+    <p><label for="id_option">オプション内容:</label> <input type="text" name="option" maxlength="100" required="" id="id_option" value="{{object.option}}"></p>
+    <p><label for="id_price">追加料金:</label> <br><input type="number" name="price" required="" id="id_price" value="{{object.price}}" style="text-align: right;">円</p>
+    <input type="submit" value="更新"">
+    <div class="back">
+        <a href="{% url 'account:option_list' %}">戻る</a>
     </div>
-    {% endfor %}
-    {% csrf_token %}
-    <button type="submit" class="btn btn-primary btn-lg">送信</button>
-    <a href="{% url 'account:user_update' %}">戻る</a>
 </form>
 <nav class="nav">
     <a href="#" id="1" class="nav__link">
@@ -32,12 +28,12 @@
     <a href="#" id="4" class="nav__link">
         <i class="material-icons nav__icon">mail_outline</i>
     </a>
-    <a href="{% url 'account:user_update' %}" id="5" class="nav__link nav__link--active">
+    <a href="{% url 'account:user_update'%}" id="5" class="nav__link nav__link--active">
         <i class="material-icons nav__icon">person</i>
     </a>
 </nav>
 {% else %}
 ログインしてください
-<p><a href="{% url 'register:login' %}">ログイン画面へ</a></p>
+<p><a href="{% url 'login' %}">ログイン画面へ</a></p>
 {% endif %}
 {% endblock %}

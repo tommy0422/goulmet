@@ -8,6 +8,6 @@ from .models import CustomUser
 # Register your models here.
 class CustomUserAdmin(UserAdmin):
     model = CustomUser
-    fieldsets = UserAdmin.fieldsets + ((None, {'fields': ('icon',)}),(None, {'fields': ('status',)}))
+    fieldsets = UserAdmin.fieldsets + ((None, {'fields': ('icon',)}),(None, {'fields': ('is_goulmet',)}))
 
 admin.site.register(CustomUser, CustomUserAdmin)

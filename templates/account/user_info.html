@@ -7,7 +7,6 @@
 
 <!DOCTYPE html>
 <html lang="ja">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,11 +16,12 @@
 
 <body>
     {% block content %}
-    {% if user.is_authenticated %}
+
+
     <!-- 切り替えボタン -->
     <div class="change">
-        <button id="done-button">Goulmet</button>
-        <button id="pending-button">User</button>
+        <a id="goulmet" href="{% url 'account:goulmet_update' %}">Goulmet</a>
+        <a id="user" href="#">User</a>
     </div>
     <!-- User情報 -->
     <div id="pending-content">
@@ -56,12 +56,9 @@
         <div class="logout">
             <a href="{% url 'account:logout' %}"><input type="submit" value="Log Out"></a>
         </div>
-    </div>
-    <!-- Goulmet情報 -->
-    <div id="done-content">
-        <li>未完了 1</li>
-        <li>未完了 2</li>
-        <li>未完了 3</li>
+        <div class="goulmet_create">
+            <a href="{% url 'account:goulmet_create' %}">Goulmet(アンバサダー)になる</a>
+        </div>
     </div>
     <nav class="nav">
         <a href="#" id="1" class="nav__link">
@@ -76,14 +73,10 @@
         <a href="#" id="4" class="nav__link">
             <i class="material-icons nav__icon">mail_outline</i>
         </a>
-        <a href="{% url 'account:user_update' pk=user.pk %}" id="5" class="nav__link nav__link--active">
+        <a href="{% url 'account:user_update'%}" id="5" class="nav__link nav__link--active">
             <i class="material-icons nav__icon">person</i>
         </a>
     </nav>
-    {% else %}
-    ログインしてください
-    <p><a href="{% url 'register:login' %}">ログイン画面へ</a></p>
-    {% endif %}
     <script type="text/javascript" src="{% static 'user_info.js' %}"></script>
 
     {% endblock %}
