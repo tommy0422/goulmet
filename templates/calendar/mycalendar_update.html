@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block customcss %}
+<style>
+    body{
+        height: 924px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+</head>
+{% if user.is_authenticated %}
+<div class="container mt-5">
+    <div style="justify-content:center;" class="row">
+        <div class="col-md-6">
+                <form action="" method="POST">{% csrf_token %}
+                    <div class="form-group row">
+                        <label for="終了時間"
+                            class="col-sm-4 col-form-label">開始時間：</label>
+                        <div class="col-sm-8">
+                            {{form.start_time}}
+                            {{ field.errors }}
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="開始時間"
+                            class="col-sm-4 col-form-label">終了時間：</label>
+                        <div class="col-sm-8">
+                            {{form.end_time}}
+                            {{ field.errors }}
+                        </div>
+                    </div>
+                <button type="submit" class="btn btn-primary btn-block">送信</button>
+            </form>
+            <div>
+                <a style="text-decoration: none;" href="{% url 'calendar_app:mycalendar_delete' pk=object.pk%}"><button type="submit" class="btn btn-danger btn-block" style="margin: 25px 0 ; text-decoration: none;">削除</button></a>
+            </div>
+            <div style="text-align: center;">
+                <a href="{% url 'calendar_app:mycalendar'%}">戻る</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+<nav class="nav">
+    <a href="{% url 'search_app:search_form' %}" id="1" class="nav__link">
+        <i class="material-icons nav__icon">search</i>
+    </a>
+    <a href="#" id="2" class="nav__link">
+        <i class="material-icons nav__icon">favorite</i>
+    </a>
+    <a href="#" id="3" class="nav__link">
+        <i class="material-icons nav__icon">calendar_today</i>
+    </a>
+    <a href="#" id="4" class="nav__link">
+        <i class="material-icons nav__icon">mail_outline</i>
+    </a>
+    <a href="{% url 'account:user_update' %}" id="5" class="nav__link nav__link--active">
+        <i class="material-icons nav__icon">person</i>
+    </a>
+</nav>
+{% else %}
+ログインしてください
+<p><a href="{% url 'register:login' %}">ログイン画面へ</a></p>
+{% endif %}
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"crossorigin="anonymous"></script>
+{% endblock %}
+
+
+{% block extrajs %}
+<link rel="stylesheet" type="text/css"href="https://cdnjs.cloudflare.com/ajax/libs/timedropper/1.0/timedropper.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/timedropper/1.0/timedropper.min.js"></script>
+<script>
+    $(function () {
+        // timedropper
+        $("#id_start_time").timeDropper({
+            format: "H:mm",
+            setCurrentTime: false,
+        });
+        $("#id_end_time").timeDropper({
+            format: "H:mm",
+            setCurrentTime: false,
+        });
+    });
+</script>
+{% endblock %}

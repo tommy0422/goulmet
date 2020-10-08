@@ -18,10 +18,7 @@ def loginfunc(request):
         #認証成功するかしないか
         if user is not None:
             login(request, user)
-            return redirect('register:top')
+            return redirect('search_app:search_form')
         else:
             return redirect('register:login')
     return render(request, 'register/login.html')
-
-class TopView(TemplateView):
-    template_name = 'register/top.html'

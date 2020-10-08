@@ -32,7 +32,7 @@
                 {% else %}
                 <img src="{% static 'img/no_icon.png' %}" alt="" id="preview">
                 {% endif %}
-                <input type="file" name="icon" accept="image/*" id="id_icon" capture="camera"
+                <input type="file" name="icon" accept="media/*" id="id_icon" capture="camera"
                     onchange="previewImage(this);">
             </div>
             <p>
@@ -57,11 +57,11 @@
             <a href="{% url 'account:logout' %}"><input type="submit" value="Log Out"></a>
         </div>
         <div class="goulmet_create">
-            <a href="{% url 'account:goulmet_create' %}">Goulmet(アンバサダー)になる</a>
+            <a style="text-decoration: none;" href="{% url 'account:judge_clear' %}">Goulmet(アンバサダー)になる</a>
         </div>
     </div>
     <nav class="nav">
-        <a href="#" id="1" class="nav__link">
+        <a href="{% url 'search_app:search_form' %}" id="1" class="nav__link">
             <i class="material-icons nav__icon">search</i>
         </a>
         <a href="#" id="2" class="nav__link">
@@ -77,7 +77,15 @@
             <i class="material-icons nav__icon">person</i>
         </a>
     </nav>
-    <script type="text/javascript" src="{% static 'user_info.js' %}"></script>
+    <script>
+        function previewImage(obj) {
+            var fileReader = new FileReader();
+            fileReader.onload = (function() {
+                document.getElementById('preview').src = fileReader.result;
+            });
+            fileReader.readAsDataURL(obj.files[0]);
+        }
+    </script>
 
     {% endblock %}
 

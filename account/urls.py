@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import user_update,user_detail,logout,PasswordChange,PasswordChangeDone,goulmet_create,judge_start,additional_option,goulmet_update, goulmet_detail,option_list,OptionDelete,OptionUpdate
+from .views import user_update,user_detail,logout,PasswordChange,PasswordChangeDone,goulmet_create,judge_start,judge_clear,additional_option,goulmet_update, goulmet_detail,option_list,OptionDelete,OptionUpdate
 
 app_name = "account"
 
@@ -11,6 +11,7 @@ urlpatterns = [
     path('logout/', logout, name='logout'),
     path('goulmet_create/',goulmet_create,name='goulmet_create'),
     path('judge_start/',judge_start,name='judge_start'),
+    path('judge_clear/',judge_clear,name='judge_clear'),
     path('additional_option/',additional_option,name='additional_option'),
     path('goulmet_update/',goulmet_update,name='goulmet_update'),
     path('goulmet_detail/',goulmet_detail,name='goulmet_detail'),

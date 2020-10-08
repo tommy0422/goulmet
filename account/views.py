@@ -14,14 +14,14 @@ from django.contrib.auth.views import PasswordChangeView, PasswordChangeDoneView
 @login_required
 def user_update(request):
     """ユーザー情報の更新"""
-    # urlを基に、DayModelを取得
+    # urlを基に、CustomUserを取得
     user = get_object_or_404(CustomUser, pk=request.session['_auth_user_id'])
 
      # フォームに、取得したCustomUserを紐付ける
-    form = UserUpdateForm(request.POST or None, instance=user)
-    
+    form = UserUpdateForm(request.POST, request.FILES or None, instance=user)
+
     # method = POST、つまり送信ボタン押下時、入力内容に問題なければ
-    if request.method == 'POST' and form.is_valid():
+    if request.method == 'POST' and 'FILES' and form.is_valid():
         form.save()
         return redirect('account:user_detail')
 
@@ -73,12 +73,17 @@ def goulmet_create(request):
         else:
             return render(request,'account/goulmet_create.html')
     else:
-        return render(request, 'account/user_info.html')
+        return render(request, 'account/judge_start.html')
 
 @login_required
 def judge_start(request):
     """審査開始"""
     return render(request, 'account/judge_start.html')
+
+@login_required
+def judge_clear(request):
+    """審査開始"""
+    return render(request, 'account/judge_clear.html')
 
 @login_required
 def goulmet_update(request):
@@ -91,7 +96,7 @@ def goulmet_update(request):
 
     if goulmet.is_pass ==True:
         # method = POST、つまり送信ボタン押下時、入力内容に問題なければ
-        if request.method == 'POST':
+        if request.method == 'POST' and form.is_valid():
             form.save()
             return redirect('account:goulmet_detail')
 
@@ -116,7 +121,6 @@ def option_list(request):
     return render(request,'account/option_list.html',{'object_list':object_list})
 
 @login_required
-   
 def additional_option(request):
     """追加オプション登録"""
     form = OptionModel(request.POST or None)  

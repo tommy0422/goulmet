@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block customcss %}
+<style>
+   .goulmet{
+        padding: 15px;
+        margin: 30px 0;
+        border-style: solid;
+        border-color: rgb(93, 93, 93);
+        border-radius: 10px;
+        box-shadow: 7px 7px 7px 
+        rgba(0,0,0,0.4); 
+   }
+
+   #icon{
+       height: 90px;
+       width: 90px;
+       border-radius: 50%;
+   }
+
+   .goulmet{
+       display: flex;
+   }
+
+   .goulmet_info{
+       margin-left: 30px;
+       justify-content: center;
+       width: 85%;
+       font-weight: bold;
+   }
+</style>
+{% endblock %}
+
+{% block content %}
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+</head>
+{% if user.is_authenticated %}
+<div  style="margin-top: 15px;">
+    <div class="container">
+        <form class="" action="" method="GET"> 
+            <input type="text" class="form-control" placeholder="地域名を入力してください" name="keyword">
+            <input style="width: 100%; margin-top: 5px; border: 1px solid #ced4da;" type="datetime-local" name="" id="">
+            <div style="text-align: center; margin-top: 10px;">
+                <input type="submit" value="検索">
+            </div>
+        </form>
+    {% for object in object_list %}
+        <a style="text-decoration: none; color: #000000;" href="{% url 'search_app:goulmet_info' pk=object.pk %}">
+            <div class="goulmet">
+                <div class="goulmet_icon">
+                    <img id="icon" src="{{object.user_id.icon.url}}" alt="">
+                </div>
+                <div class="goulmet_info">
+                    <div style="text-align: center;">
+                        <h4>{{object.user_id}}（{{object.area}}）</h4>
+                    </div>
+                    <hr>
+                    <p>{{object.plan}}</p>
+                    <div style="text-align: right; font-size: 20px;">
+                        <p>{{object.base_price}}円/人</p>
+                    </div>
+                </div>
+            </div>
+        </a>
+    {% endfor %}
+    </div>
+</div>
+<nav class="nav">
+    <a style="text-decoration: none;" href="{% url 'search_app:search_form' %}" id="1" class="nav__link nav__link--active">
+        <i class="material-icons nav__icon">search</i>
+    </a>
+    <a style="text-decoration: none;" href="#" id="2" class="nav__link">
+        <i class="material-icons nav__icon">favorite</i>
+    </a>
+    <a style="text-decoration: none;" href="#" id="3" class="nav__link">
+        <i class="material-icons nav__icon">calendar_today</i>
+    </a>
+    <a style="text-decoration: none;" href="#" id="4" class="nav__link">
+        <i class="material-icons nav__icon">mail_outline</i>
+    </a>
+    <a style="text-decoration: none;" href="{% url 'account:user_update' %}" id="5" class="nav__link">
+        <i class="material-icons nav__icon">person</i>
+    </a>
+</nav>
+{% else %}
+ログインしてください
+<p><a href="{% url 'register:login' %}">ログイン画面へ</a></p>
+{% endif %}
+{% endblock %}

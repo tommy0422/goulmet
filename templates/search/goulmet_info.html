@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block customcss %}
+<link rel="stylesheet" href="{% static 'goulmet_info.css' %}">
+{% endblock %}
+
+{% block content %}
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+</head>
+<div class="container">
+    <div class="mt-5">
+        <div class="icon_name">
+            <img style="margin-right: 50px;" id="icon" src="{{object.user_id.icon.url}}" alt="">
+            <h3 style="color: rgb(88, 87, 87);">{{object.user_id}}</h3>
+        </div>
+        <hr>
+        <div class="box">
+            <h3>地域</h3>
+            <div class="inner">
+              <p>{{object.area}}</p>
+            </div> 
+        </div>
+        <div class="box">
+            <h3>自己紹介</h3>
+            <div class="inner">
+              <p>{{object.self_introduction}}</p>
+            </div> 
+        </div>
+        <div class="box">
+            <h3>プラン</h3>
+            <div class="inner">
+              <p>{{object.plan}}</p>
+            </div> 
+        </div>
+        <div class="box">
+            <h3>追加オプション</h3>
+            <div class="inner">
+                <form action="">
+                    {% for item in object2 %}
+                        <div name="options" class="btn2_wrap">
+                            <input type="checkbox" data-price="{{item.price}}" name="option" id="{{item.id}}" value="{{item.id}}" onClick="calc_total(this)">
+                            <label for="{{item.id}}">{{item.option}} {{item.price}}円</label>
+                        </div>
+                    {% endfor %}
+            </div> 
+        </div>
+                    <div class="base_price">
+                        <h3>合計金額：<span id="total">{{object.base_price}}</span>円</h3>
+                    </div>
+                    <div class="reservation">
+                        <input type="hidden" name="" value="{{object.id}}">
+                        <a href="{% url 'reservation:reservation_option' %}"><input style="border-radius: 5px;" type="submit" value="予約可能日を確認する"></a>
+                    </div>
+                </form>
+        <div style="text-align: center;">
+            <a href="{% url 'search_app:search_form' %}">戻る</a>
+        </div>
+    </div>
+</div>
+<nav class="nav">
+    <a style="text-decoration: none;" href="{% url 'search_app:search_form' %}" id="1" class="nav__link nav__link--active">
+        <i class="material-icons nav__icon">search</i>
+    </a>
+    <a style="text-decoration: none;" href="#" id="2" class="nav__link">
+        <i class="material-icons nav__icon">favorite</i>
+    </a>
+    <a style="text-decoration: none;" href="#" id="3" class="nav__link">
+        <i class="material-icons nav__icon">calendar_today</i>
+    </a>
+    <a style="text-decoration: none;" href="#" id="4" class="nav__link">
+        <i class="material-icons nav__icon">mail_outline</i>
+    </a>
+    <a style="text-decoration: none;" href="{% url 'account:user_update' %}" id="5" class="nav__link">
+        <i class="material-icons nav__icon">person</i>
+    </a>
+</nav>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"crossorigin="anonymous"></script>
+{% endblock %}
+
+{% block extrajs %}
+    <script>
+        let total_price = {{object.base_price}};
+        function calc_total(obj){
+            if (obj.checked){
+                total_price += parseInt(obj.getAttribute('data-price'))
+            } else{
+                total_price -= parseInt(obj.getAttribute('data-price'))
+            }
+            document.getElementById('total').innerHTML = total_price
+        }
+    </script>
+{% endblock %}

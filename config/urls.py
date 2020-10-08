@@ -7,6 +7,8 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('register.urls')),
-    path('search/', include('search.urls')),
     path('account/', include('account.urls')),
+    path('calendar/',include('calendar_app.urls')),
+    path('search/',include('search_app.urls')),
+    path('reservation/',include('reservation.urls')),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + staticfiles_urlpatterns()

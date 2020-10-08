@@ -24,7 +24,7 @@ class GoulmetUpdateForm(ModelForm):
     """"Goulmet情報更新フォーム"""
     class Meta:
         model = GoulmetModel
-        fields = ('user_id','self_introduction','area','plan','base_price')
+        fields = ('self_introduction','area','plan','base_price')
 
 class OptionUpdateForm(ModelForm):
     """追加オプション編集フォーム"""

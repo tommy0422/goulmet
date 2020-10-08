@@ -19,13 +19,13 @@
     <input type="submit" value="更新">
 </form>
 <div class="calendar">
-    <a href="#"><input type="submit" value="対応可能日時"></a>
+    <a href="{% url 'calendar_app:mycalendar' %}"><input type="submit" value="対応可能日時"></a>
 </div>
 <div class="receive">
     <a href="#"><input type="submit" value="支払い受け取り方法"></a>
 </div>
 <nav class="nav">
-    <a href="#" id="1" class="nav__link">
+    <a href="{% url 'search_app:search_form' %}" id="1" class="nav__link">
         <i class="material-icons nav__icon">search</i>
     </a>
     <a href="#" id="2" class="nav__link">

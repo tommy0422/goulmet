@@ -28,8 +28,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'register',
-    'search',
     'account',
+    'calendar_app',
+    'search_app',
+    'reservation',
 ]
 
 AUTH_USER_MODEL = 'myuser.CustomUser'
@@ -123,6 +125,6 @@ STATICFILES_DIRS = [
 STATIC_ROOT = 'https://goulmet.lolipop.io/STATIC_URL'
 
 # 画像の保存先の指定
-MEDIA_ROOT = os.path.join(BASE_DIR, 'static/upload')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'static')
 # 画像のURL
 MEDIA_URL = '/media/'

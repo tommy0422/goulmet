@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block customcss %}
+<style>
+ table{
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 30px;
+}
+
+table tr{
+  border-bottom: solid 2px white;
+}
+
+table tr:last-child{
+  border-bottom: none;
+}
+
+table th{
+  position: relative;
+  text-align: left;
+  width: 30%;
+  background-color: #52c2d0;
+  color: white;
+  text-align: center;
+  padding: 10px 0;
+}
+
+table th:after{
+  display: block;
+  content: "";
+  width: 0px;
+  height: 0px;
+  position: absolute;
+  top:calc(50% - 10px);
+  right:-10px;
+  border-left: 10px solid #52c2d0;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+}
+
+table td{
+  text-align: left;
+  width: 70%;
+  text-align: center;
+  background-color: #eee;
+  padding: 10px 0;
+}
+
+input[type=submit] {
+    background: red;
+    border: none;
+    color: #fff;
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 20px;
+    padding: 15px;
+    carsor: pointer;
+    border-radius: 5%;
+  }
+
+  input[type=submit]:hover {
+    background: orange;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<head>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+</head>
+{% if user.is_authenticated %}
+<p style="margin-top: 20px; margin-left: 20px;">以下のデータを削除します。</p>
+<div class="container">
+    <form action = "" method = "POST">{% csrf_token %}
+        <table>
+            <tr>
+              <th>日付</th>
+              <td>{{object.start_time}}</td>
+            </tr>
+            <tr>
+              <th>時間</th>
+              <td>{{object.end_time}}</td>
+            </tr>
+          </table>
+          <div style="text-align: center;">
+            <input type ="submit" value = "削除します">
+          </div>
+    </form>
+</div>
+<div style="text-align: center; margin-top: 10px;">
+    <a href="{% url 'calendar_app:mycalendar_update' pk=object.pk %}">戻る</a>
+</div>
+<nav class="nav">
+    <a href="{% url 'search_app:search_form' %}" id="1" class="nav__link">
+        <i class="material-icons nav__icon">search</i>
+    </a>
+    <a href="#" id="2" class="nav__link">
+        <i class="material-icons nav__icon">favorite</i>
+    </a>
+    <a href="#" id="3" class="nav__link">
+        <i class="material-icons nav__icon">calendar_today</i>
+    </a>
+    <a href="#" id="4" class="nav__link">
+        <i class="material-icons nav__icon">mail_outline</i>
+    </a>
+    <a href="{% url 'account:user_update' %}" id="5" class="nav__link nav__link--active">
+        <i class="material-icons nav__icon">person</i>
+    </a>
+</nav>
+{% else %}
+ログインしてください
+<p><a href="{% url 'register:login' %}">ログイン画面へ</a></p>
+{% endif %}
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"crossorigin="anonymous"></script>
+{% endblock %}
