@@ -1,0 +1,95 @@
+body{
+    height: 1395px;
+}
+
+#goulmet {
+    padding: 10px 20px;
+    font-size: 20px;
+    border-radius: 20px;
+    background-color: orange;
+    color: white;
+    text-decoration: none;
+    box-shadow    : 6px 6px 3px #666666;
+  }
+
+#user{
+    padding: 10px 20px;
+    font-size: 20px;
+    border-radius: 20px;
+    background-color: gray;
+    color: white;
+    text-decoration: none;
+    box-shadow    : 6px 6px 3px #666666;
+}
+
+a:hover {
+  box-shadow    : none;        /* カーソル時の影消去 */
+  opacity       : 0.8;         /* カーソル時透明度 */
+}
+
+.change{
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    justify-content: space-evenly;
+}
+
+form {
+    padding-top: 30px;
+    padding-right: 30px;
+    padding-left: 30px;
+}
+
+input[type=text],
+textarea,
+input[type=submit]{
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  font-size: 17px;
+  border-radius: 5px;
+  outline: none;
+  border: 2px solid gray;
+}
+
+input[type=number]{
+    width: 50%;
+    padding: 10px;
+    margin-right: 5px;
+    margin-bottom: 15px;
+    font-size: 17px;
+    border-radius: 5px;
+    outline: none;
+    border: 2px solid gray;
+  }
+
+label {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+input[type=submit] {
+  background: red;
+  border: none;
+  color: #fff;
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 20px;
+  padding: 15px;
+  carsor: pointer;
+}
+
+.receive{
+    padding-right: 30px;
+    padding-left: 30px;
+}
+
+.calendar{
+    padding-right: 30px;
+    padding-left: 30px;
+}
+
+input[type=submit]:hover {
+    background: orange;
+  }
+

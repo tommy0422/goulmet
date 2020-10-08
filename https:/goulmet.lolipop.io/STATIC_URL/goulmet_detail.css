@@ -1,18 +1,8 @@
-.icon{
-    text-align: center;
-    margin: 10px 0px 20px 0;
-}
-
-.icon img{
-    border-radius: 50%;
-    width: 160px;
-    height: 160px;
-}
-
 #alert{
     background-color: palegreen;
     opacity: 80%;
     padding: 10px;
+    margin-bottom: 80px;
 }
 
 table{
@@ -33,11 +23,11 @@ table{
   table th{
     position: relative;
     text-align: left;
-    width: 30%;
+    width: 40%;
     background-color: #52c2d0;
     color: white;
     text-align: center;
-    padding: 10px 0;
+    padding: 10px 7px;
   }
   
   table th:after{
@@ -58,7 +48,7 @@ table{
     width: 70%;
     text-align: center;
     background-color: #eee;
-    padding: 10px 20px;
+    padding: 20px 29px;
   }
   
 

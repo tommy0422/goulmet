@@ -1,0 +1,60 @@
+table{
+    border-collapse:collapse;
+    margin:20px auto;
+    width: 90%;
+  }
+  th{
+    color:black;
+  }
+  td{
+    border-bottom:1px dashed #999;
+    text-align: center;
+  }
+  th,tr:last-child td{
+    border-bottom:2px solid orange;
+  }
+  td,th{
+    padding:10px;
+  }
+
+ .plus{
+     text-decoration: none;
+     margin-left: 20px;
+     margin-top: 30px;
+ }
+
+ input[type=submit] {
+    background: red;
+    border: none;
+    color: #fff;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 15px;
+    border-radius: 5px;
+    carsor: pointer;
+  }
+
+  #edit{
+    background-color: #4DA6FF;
+    color: white;
+    border-radius: 10%;
+  }
+
+  #delete{
+    background-color: #FA6964;
+    color: white;
+    border-radius: 10%;
+  }
+
+  .additional_option{
+      text-align: center;
+  }
+
+  .back{
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  input[type=submit]:hover {
+    background: orange;
+  }

@@ -1,28 +1,31 @@
 body{
-  height: 1015px;
+  height: 1070px;
 }
 
-button {
+#user {
     padding: 10px 20px;
     font-size: 20px;
     border-radius: 20px;
-  }
-  li {
-    font-size: 23px;
-  }
-  
-  #pending-content, #done-content {
-    display: none;
-  }
-  
-  #pending-button.active, #done-button.active{
-    color: #ffffff;
     background-color: orange;
+    color: white;
+    text-decoration: none;
+    box-shadow    : 6px 6px 3px #666666;
   }
-  
-  #pending-content.active, #done-content.active {
-    display: block;
-  }
+
+#goulmet{
+    padding: 10px 20px;
+    font-size: 20px;
+    border-radius: 20px;
+    background-color: gray;
+    color: white;
+    text-decoration: none;
+    box-shadow    : 6px 6px 3px #666666;
+}
+
+a:hover {
+  box-shadow    : none;        /* カーソル時の影消去 */
+  opacity       : 0.8;         /* カーソル時透明度 */
+}
 
 .change{
     margin-top: 30px;
@@ -50,15 +53,6 @@ button {
     width: 160px;
     height: 160px;
 }
-
-button a {
-    text-decoration: none;
-    color: #fff;
-  }
-  
-  button:hover {
-    background: rgba(0, 0, 0, 0.6);
-  }
   
   .fa {
     font-size: 1.3em;
@@ -121,4 +115,8 @@ button a {
   p a {
     text-align: none;
     font-weight: bold;
+  }
+
+  .goulmet_create{
+    text-align: center;
   }
