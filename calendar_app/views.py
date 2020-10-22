@@ -15,12 +15,6 @@ class MyCalendar(mixins.MonthCalendarMixin, mixins.WeekWithScheduleMixin, Create
     date_field = 'date'
     form_class = BS4ScheduleForm
 
-    def get_queryset(self):
-        goulmet = GoulmetModel.objects.get(user_id=self.request.session['goulmet_id'])
-        print(goulmet)
-        queryset = Schedule.objects.all().filter(user_id=goulmet)
-        return queryset
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         week_calendar_context = self.get_week_calendar()
