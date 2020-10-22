@@ -19,7 +19,6 @@
                 {% else %}
                     <td>
                 {% endif %}
-
                 <a href="{% url 'calendar_app:mycalendar' day.year day.month day.day %}">{{ day.day }}</a>
                 </td>
             {% endfor %}

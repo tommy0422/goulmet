@@ -8,7 +8,7 @@ class OptionModel(models.Model):
     user_id = models.ForeignKey(CustomUser,on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.option + ' ' + str(self.user_id)
+        return self.option + 'オプション( from ' + str(self.user_id) + ')'
 
 class GoulmetModel(models.Model):
     user_id = models.ForeignKey(CustomUser,on_delete=models.CASCADE)
@@ -18,6 +18,7 @@ class GoulmetModel(models.Model):
     base_price = models.IntegerField('基本料金')
     is_pass = models.BooleanField('審査合格フラグ',null=True)
     created_at = models.DateTimeField('作成日時',auto_now_add=True)
+    like = models.ManyToManyField(CustomUser, related_name='like', blank=True)
 
     def __str__(self):
         return str(self.user_id)

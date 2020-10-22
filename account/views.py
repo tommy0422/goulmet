@@ -73,7 +73,7 @@ def goulmet_create(request):
         else:
             return render(request,'account/goulmet_create.html')
     else:
-        return render(request, 'account/judge_start.html')
+        return render(request, 'account/judge_clear.html')
 
 @login_required
 def judge_start(request):
@@ -81,14 +81,10 @@ def judge_start(request):
     return render(request, 'account/judge_start.html')
 
 @login_required
-def judge_clear(request):
-    """審査開始"""
-    return render(request, 'account/judge_clear.html')
-
-@login_required
 def goulmet_update(request):
     """Goulmet情報更新"""
     # urlを基に、GoulmetModelを取得
+    print(request.POST)
     goulmet = get_object_or_404(GoulmetModel, user_id=request.session['_auth_user_id'])
 
     #フォームに、取得したGoulmetModelを紐付ける
@@ -146,7 +142,7 @@ class OptionUpdate(UpdateView):
     template_name = 'account/option_update.html'
     form_class =  OptionUpdateForm
     model = OptionModel
-    success_url = reverse_lazy('account:optionlist')
+    success_url = reverse_lazy('account:option_list')
 
 
         

@@ -15,6 +15,12 @@ class MyCalendar(mixins.MonthCalendarMixin, mixins.WeekWithScheduleMixin, Create
     date_field = 'date'
     form_class = BS4ScheduleForm
 
+    def get_queryset(self):
+        goulmet = GoulmetModel.objects.get(user_id=self.request.session['goulmet_id'])
+        print(goulmet)
+        queryset = Schedule.objects.all().filter(user_id=goulmet)
+        return queryset
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         week_calendar_context = self.get_week_calendar()
@@ -58,7 +64,7 @@ class MyCalendarUpdate(mixins.MonthCalendarMixin, mixins.WeekWithScheduleMixin, 
         return redirect('calendar_app:mycalendar', year=date.year, month=date.month, day=date.day)
 
 class MyCalendarDelete(mixins.MonthCalendarMixin, mixins.WeekWithScheduleMixin, DeleteView):
-    """カレンダーの更新"""
+    """カレンダーの削除"""
     template_name = 'calendar/mycalendar_delete.html'
     model = Schedule
     form_class = BS4ScheduleForm

@@ -11,4 +11,5 @@ urlpatterns = [
     path('calendar/',include('calendar_app.urls')),
     path('search/',include('search_app.urls')),
     path('reservation/',include('reservation.urls')),
+    path('favorite/',include('favorite.urls')),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + staticfiles_urlpatterns()

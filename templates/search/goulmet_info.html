@@ -12,8 +12,15 @@
 <div class="container">
     <div class="mt-5">
         <div class="icon_name">
-            <img style="margin-right: 50px;" id="icon" src="{{object.user_id.icon.url}}" alt="">
+            {% if object.user_id.icon %}
+                <img style="margin-right: 50px;" id="icon" src="{{object.user_id.icon.url}}" alt="" id="preview">
+            {% else %}
+                <img style="margin-right: 50px;" id="icon" src="{% static 'img/no_icon.png' %}" alt="" id="preview">
+            {% endif %}
             <h3 style="color: rgb(88, 87, 87);">{{object.user_id}}</h3>
+        </div>
+        <div>
+            {% include 'favorite/favorite.html' %}
         </div>
         <hr>
         <div class="box">
@@ -37,21 +44,26 @@
         <div class="box">
             <h3>追加オプション</h3>
             <div class="inner">
-                <form action="">
+                <form class="option_form" action="{% url 'reservation:session_save' %}" method="POST">{% csrf_token %}
+                    {% if object2 %}
                     {% for item in object2 %}
-                        <div name="options" class="btn2_wrap">
-                            <input type="checkbox" data-price="{{item.price}}" name="option" id="{{item.id}}" value="{{item.id}}" onClick="calc_total(this)">
+                        <div style="margin: 5px;" name="options" class="btn2_wrap">
+                            <input type="checkbox" data-price="{{item.price}}" name="option" id="{{item.id}}" value={{item.id}} onClick="calc_total(this)">
                             <label for="{{item.id}}">{{item.option}} {{item.price}}円</label>
                         </div>
                     {% endfor %}
+                    {% else %}
+                        <p>追加オプションはありません</p>
+                    {% endif %}
             </div> 
         </div>
                     <div class="base_price">
                         <h3>合計金額：<span id="total">{{object.base_price}}</span>円</h3>
+                        <input type="hidden" name="base_price" value={{object.base_price}}>
                     </div>
                     <div class="reservation">
-                        <input type="hidden" name="" value="{{object.id}}">
-                        <a href="{% url 'reservation:reservation_option' %}"><input style="border-radius: 5px;" type="submit" value="予約可能日を確認する"></a>
+                        <input style="border-radius: 5px;" type="submit" value="予約可能日を確認する">
+                        <input type="hidden" name="goulmet_id" value="{{object.id}}">
                     </div>
                 </form>
         <div style="text-align: center;">
@@ -63,10 +75,10 @@
     <a style="text-decoration: none;" href="{% url 'search_app:search_form' %}" id="1" class="nav__link nav__link--active">
         <i class="material-icons nav__icon">search</i>
     </a>
-    <a style="text-decoration: none;" href="#" id="2" class="nav__link">
+    <a style="text-decoration: none;" href="{% url 'favorite:favorite_list' %}" id="2" class="nav__link">
         <i class="material-icons nav__icon">favorite</i>
     </a>
-    <a style="text-decoration: none;" href="#" id="3" class="nav__link">
+    <a style="text-decoration: none;" href="{% url 'reservation:reservation_confirm' %}" id="3" class="nav__link">
         <i class="material-icons nav__icon">calendar_today</i>
     </a>
     <a style="text-decoration: none;" href="#" id="4" class="nav__link">
@@ -92,5 +104,20 @@
             }
             document.getElementById('total').innerHTML = total_price
         }
+
+        window.addEventListener( "pageshow", function ( event ) {
+            var historyTraversal = event.persisted || 
+                                    ( typeof window.performance != "undefined" && 
+                                        window.performance.navigation.type === 2 );
+            if ( historyTraversal ) {
+                // Handle page restore.
+                window.location.reload();
+            }
+        });
+
+        $(function() {
+        var height=$(".nav").height();
+        $("body").css("margin-bottom", height+10);
+    });
     </script>
 {% endblock %}

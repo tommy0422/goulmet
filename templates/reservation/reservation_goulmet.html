@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block customcss %}
+<link rel="stylesheet" href="{% static 'goulmet_info.css' %}">
+{% endblock %}
+
+{% block content %}
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+</head>
+
+<div class="container">
+    <div class="mt-5">
+        <div class="icon_name">
+            {% if object.user_id.icon %}
+                <img style="margin-right: 50px;" id="icon" src="{{object.user_id.icon.url}}" alt="" id="preview">
+            {% else %}
+                <img style="margin-right: 50px;" id="icon" src="{% static 'img/no_icon.png' %}" alt="" id="preview">
+            {% endif %}
+            <h3 style="color: rgb(88, 87, 87);">{{object.user_id}}</h3>
+        </div>
+        <hr>
+        <div class="box">
+            <h3>地域</h3>
+            <div class="inner">
+              <p>{{object.goulmet_id.area}}</p>
+            </div> 
+        </div>
+        <div class="box">
+            <h3>自己紹介</h3>
+            <div class="inner">
+              <p>{{object.goulmet_id.self_introduction}}</p>
+            </div> 
+        </div>
+        <div class="box">
+            <h3>プラン</h3>
+            <div class="inner">
+              <p>{{object.goulmet_id.plan}}</p>
+            </div> 
+        </div>
+        <div class="box">
+            <h3>追加したオプション</h3>
+            <div class="inner">
+                {% if object2 %}
+                    {% for item in object2 %}
+                        <div style="margin: 5px;" name="options" class="btn2_wrap">
+                            <p>{{item.option_id.option}} {{item.option_id.price}}円</p>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <p>選択した追加オプションはありません</p>
+                {% endif %}
+            </div> 
+        </div>
+                    <div class="base_price">
+                        <h3>合計金額：<span id="total">{{sum}}</span>円</h3>
+                    </div>
+        <div style="text-align: center;">
+            <a href="{% url 'reservation:reservation_confirm' %}">戻る</a>
+        </div>
+    </div>
+</div>
+<nav class="nav">
+    <a style="text-decoration: none;" href="{% url 'search_app:search_form' %}" id="1" class="nav__link">
+        <i class="material-icons nav__icon">search</i>
+    </a>
+    <a style="text-decoration: none;" href="{% url 'favorite:favorite_list' %}" id="2" class="nav__link">
+        <i class="material-icons nav__icon">favorite</i>
+    </a>
+    <a style="text-decoration: none;" href="{% url 'reservation:reservation_confirm' %}" id="3" class="nav__link nav__link--active">
+        <i class="material-icons nav__icon">calendar_today</i>
+    </a>
+    <a style="text-decoration: none;" href="#" id="4" class="nav__link">
+        <i class="material-icons nav__icon">mail_outline</i>
+    </a>
+    <a style="text-decoration: none;" href="{% url 'account:user_update' %}" id="5" class="nav__link">
+        <i class="material-icons nav__icon">person</i>
+    </a>
+</nav>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"crossorigin="anonymous"></script>
+{% endblock %}
+
+{% block extrajs %}
+    <script>
+        $(function() {
+        var height=$(".nav").height();
+        $("body").css("margin-bottom", height+10);
+    });
+    </script>
+{% endblock %}

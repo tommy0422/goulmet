@@ -1,7 +1,3 @@
-body{
-    height: 1067px;
-}
-
 #icon{
     width: 110px;
     height: 110px;
@@ -11,6 +7,10 @@ body{
 .icon_name{
     display: flex;
     align-items: center;
+}
+
+.like-red{
+    color: red;
 }
 
 .box{
@@ -39,9 +39,6 @@ text-align: center;
     padding-right: 20px;
 }
 
-.btn2_wrap{
-    position: relative;
-}
 .btn2_wrap input{
     opacity: 0;
     position: absolute;
@@ -51,7 +48,6 @@ text-align: center;
     padding: 10px 20px;
     border-radius: 20px;
     background: #eee;
-    display: inline-block;
     cursor: pointer;
     transition: .5s;
 }

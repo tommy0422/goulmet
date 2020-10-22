@@ -12,7 +12,7 @@ BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 SECRET_KEY = '14+%etlfz+l3m!sj^i-f-(*u&z4@&!vdso&s#rn04^+y$x9ou1'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG =True
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'calendar_app',
     'search_app',
     'reservation',
+    'favorite',
 ]
 
 AUTH_USER_MODEL = 'myuser.CustomUser'

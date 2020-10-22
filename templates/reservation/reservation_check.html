@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block customcss %}
+<style>
+  input[type=submit] {
+    background: red;
+    border: none;
+    color: #fff;
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 20px;
+    padding: 15px;
+    carsor: pointer;
+    border-radius: 5px;
+  }
+
+  input[type=submit]:hover {
+    background: orange;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+</head>
+<div class="container mt-4">
+    <h3 class="mb-3 ml-4">最終確認画面</h3>
+    <p>誤りがないか確認して予約確定してください。</p>
+    <table class="table">
+        <tbody>
+          <tr>
+            <th scope="row">Goulmet</th>
+            <td>{{goulmet_object.user_id.username}}</td>
+          </tr>
+          <tr>
+            <th scope="row">地域</th>
+            <td>{{goulmet_object.area}}</td>
+          </tr>
+          <tr>
+            <th scope="row">プラン</th>
+            <td>{{goulmet_object.plan}}</td>
+          </tr>
+          <tr>
+            <th scope="row">予約日時</th>
+            <td>
+                <p>{{request.session.date}}</p>
+                <p>{{request.session.start_time}}〜{{request.session.end_time}}</p>
+            </td>
+          </tr>
+          <tr>
+            <th scope="row">基本料金</th>
+            <td>{{goulmet_object.base_price}}円</td>
+          </tr>
+          <tr>
+            <th scope="row">追加オプション</th>
+            <td>
+                {% if order_option %}
+                {% for option in order_option %}
+                <p>{{option.option}} {{option.price}}円</p>
+                {% endfor %}  
+                {% else %}
+                <p>なし</p>
+                {% endif %}
+            </td>
+            <tr>
+                <th scope="row">合計金額</th>
+                <td><h4>{{sum}}円</h4></td>
+            </tr>
+        </tbody>
+      </table>
+
+</div>
+<div class="back" style="text-align: center;">
+    <a href="{% url 'reservation:reservation_save' %}"><input type="submit" value="予約確定"></a>
+</div>
+
+<nav class="nav">
+    <a style="text-decoration: none;" href="{% url 'search_app:search_form' %}" id="1" class="nav__link nav__link--active">
+        <i class="material-icons nav__icon">search</i>
+    </a>
+    <a style="text-decoration: none;" href="{% url 'favorite:favorite_list' %}" id="2" class="nav__link">
+        <i class="material-icons nav__icon">favorite</i>
+    </a>
+    <a style="text-decoration: none;" href="{% url 'reservation:reservation_confirm' %}" id="3" class="nav__link">
+        <i class="material-icons nav__icon">calendar_today</i>
+    </a>
+    <a style="text-decoration: none;" href="#" id="4" class="nav__link">
+        <i class="material-icons nav__icon">mail_outline</i>
+    </a>
+    <a style="text-decoration: none;" href="{% url 'account:user_update' %}" id="5" class="nav__link">
+        <i class="material-icons nav__icon">person</i>
+    </a>
+</nav>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"crossorigin="anonymous"></script>
+{% endblock %}
+
+{% block extrajs %}
+    <script>
+        $(function() {
+        var height=$(".nav").height();
+        $("body").css("margin-bottom", height+10);
+    });
+    </script>
+{% endblock %}

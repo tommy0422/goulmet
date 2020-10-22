@@ -1,0 +1,9 @@
+{% if request.user.is_authenticated %}
+    <form style="text-align: right; position: relative; bottom: 10px;" action="{% url 'favorite:favorite' %}" method="POST">{% csrf_token %}
+        {% if liked %}
+            <button type="submit" id="favorite" name="goulmet_id" value="{{object.pk}}" class="btn"><i class="fas fa-lg fa-heart fa-2x like-red"></i></button>
+        {% else %}
+            <button type="submit" id="favorite" name="goulmet_id" value="{{object.pk}}" class="btn"><i class="far fa-lg fa-heart fa-2x"></i></button>      
+        {% endif %}
+    </form>
+{% endif %}
