@@ -80,7 +80,6 @@ a:hover {
     {% include 'reservation/includes/not_reservation.html' %}
 {% else %}
 <div class="container">
-<h1 style="margin-top: 20px;">予約リスト</h1>
 {% for object in object_list %}
 <a style="text-decoration: none; color: #000000;" href="{% url 'reservation:reservation_goulmet' pk=object.pk %}">
     <div class="goulmet">
