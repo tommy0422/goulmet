@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     'search_app',
     'reservation',
     'favorite',
+    'chat',
 ]
 
 AUTH_USER_MODEL = 'myuser.CustomUser'

@@ -7,7 +7,9 @@ from calendar_app.models import Schedule
 from myuser.models import CustomUser
 from .models import OrderModel, OrderOption
 from account.models import GoulmetModel, OptionModel
+from chat.models import RoomModel
 from django.views.generic import TemplateView
+from django.http import HttpResponse
 
 # Create your views here.
 @login_required
@@ -27,7 +29,7 @@ class GoulmetCalendar(mixins.MonthCalendarMixin, mixins.WeekWithScheduleMixin,Te
     date_field = 'date'
 
     def get_queryset(self):
-        goulmet = GoulmetModel.objects.get(user_id=self.request.session['goulmet_id'])
+        goulmet = GoulmetModel.objects.get(id=self.request.session['goulmet_id'])
         queryset = Schedule.objects.all().filter(user_id=goulmet)
         return queryset
 
@@ -64,7 +66,8 @@ def reservation_check(request):
         for opt in request.session['options']:
             order_option.append(OptionModel.objects.get(pk=opt))
             option_object = OptionModel.objects.get(pk=opt)
-            option_sum =+ option_object.price
+            option_sum += option_object.price
+        print(option_sum)
         sum = goulmet_object.base_price + option_sum
         print(sum)
 
@@ -80,7 +83,7 @@ def reservation_save(request):
         order = OrderModel.objects.create(
             user_id =  user_object,
             base_price = request.session['base_price'],
-            goulmet_id = GoulmetModel.objects.get(id=request.session['goulmet_id']),
+            goulmet_id = GoulmetModel.objects.get(pk=request.session['goulmet_id']),
             date = request.session['date'],
             start_time = request.session['start_time'],
             end_time = request.session['end_time'],      
@@ -97,6 +100,12 @@ def reservation_save(request):
                     option_price = object_price
                 )
             option.save()
+        room = RoomModel.objects.create(
+            user_id = user_object,
+            goulmet_id = GoulmetModel.objects.get(id=request.session['goulmet_id']),
+            order_id = order_object
+            )
+        room.save()
         return redirect('reservation:reservation_confirm')
     else:
         return redirect('search_app:search_form')
@@ -119,6 +128,18 @@ def reservation_goulmet(request,pk):
     sum = object.base_price + option_sum
     print(sum)
     return render(request, 'reservation/reservation_goulmet.html', {'object': object,'object2':object2,'sum':sum})
+
+@login_required
+def reservation_confirm_goulmet(request):
+    """予約リスト（goulmet側）"""
+    user = CustomUser.objects.get(pk=request.session['_auth_user_id'])
+    if GoulmetModel.objects.filter(user_id=user).exists():
+        goulmet_object = GoulmetModel.objects.get(user_id=user)
+        object_list = OrderModel.objects.all().filter(goulmet_id=goulmet_object)
+        return render(request, 'reservation/reservation_confirm_goulmet.html', {'object_list': object_list})
+    else:
+        return HttpResponse('あなたはまだGoulmetに認定されていません。')
+
 
 
 

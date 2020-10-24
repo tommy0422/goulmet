@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block customcss %}
+<style>
+    #goulmet {
+    padding: 10px 20px;
+    font-size: 20px;
+    border-radius: 20px;
+    background-color: orange;
+    color: white;
+    text-decoration: none;
+    box-shadow    : 6px 6px 3px #666666;
+  }
+
+#user{
+    padding: 10px 20px;
+    font-size: 20px;
+    border-radius: 20px;
+    background-color: gray;
+    color: white;
+    text-decoration: none;
+    box-shadow    : 6px 6px 3px #666666;
+}
+
+a:hover {
+  box-shadow    : none;        /* カーソル時の影消去 */
+  opacity       : 0.8;         /* カーソル時透明度 */
+}
+
+.change{
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    justify-content: space-evenly;
+}
+
+   .goulmet{
+        padding: 15px;
+        margin: 30px 0;
+        border-style: solid;
+        border-color: rgb(93, 93, 93);
+        border-radius: 10px;
+        box-shadow: 7px 7px 7px 
+        rgba(0,0,0,0.4); 
+   }
+
+   #icon{
+       height: 90px;
+       width: 90px;
+       border-radius: 50%;
+   }
+
+   .goulmet{
+       display: flex;
+   }
+
+   .goulmet_info{
+       margin-left: 30px;
+       justify-content: center;
+       width: 85%;
+       font-weight: bold;
+   }
+</style>
+{% endblock %}
+
+{% block header %}
+<h1 style="margin-top: 20px; margin-left: 30px;">受信トレイ</h1>
+{% endblock %}
+
+{% block content %}
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+</head>
+<!-- 切り替えボタン -->
+<div style="margin-bottom: 20px;" class="change">
+    <a id="goulmet" href="#">Goulmet</a>
+    <a id="user" href="{% url 'chat:chat_list' %}">User</a>
+</div>
+<div class="container">
+{% for object in object_list %}
+    <a style="text-decoration: none; color: #000000;" href="#">
+        <div class="goulmet">
+            <div class="goulmet_icon">
+                <img id="icon" src="{{object.goulmet_id.user_id.icon.url}}" alt="">
+            </div>
+            <div class="goulmet_info">
+                <div style="text-align: center;">
+                    <h4>{{object.goulmet_id.user_id}}（{{object.goulmet_id.area}}）</h4>
+                </div>
+                <hr>
+                <div style="text-align: right; font-size: 20px;">
+                    <p>{{object.order_id.date}} {{object.order_id.start_time}}-{{object.order_id.end_time}}</p>
+                </div>
+            </div>
+        </div>
+    </a>
+</div>
+{% endfor %}
+<nav class="nav">
+    <a style="text-decoration: none;" href="{% url 'search_app:search_form' %}" id="1" class="nav__link">
+        <i class="material-icons nav__icon">search</i>
+    </a>
+    <a style="text-decoration: none;" href="{% url 'favorite:favorite_list' %}" id="2" class="nav__link">
+        <i class="material-icons nav__icon">favorite</i>
+    </a>
+    <a style="text-decoration: none;" href="{% url 'reservation:reservation_confirm' %}" id="3" class="nav__link">
+        <i class="material-icons nav__icon">calendar_today</i>
+    </a>
+    <a style="text-decoration: none;" href="{% url 'chat:chat_list' %}" id="4" class="nav__link nav__link--active">
+        <i class="material-icons nav__icon">mail_outline</i>
+    </a>
+    <a style="text-decoration: none;" href="{% url 'account:user_update' %}" id="5" class="nav__link">
+        <i class="material-icons nav__icon">person</i>
+    </a>
+</nav>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"crossorigin="anonymous"></script>
+{% endblock %}
+
+{% block extrajs %}
+<script>
+    $(function() {
+        var height=$(".nav").height();
+        $("body").css("margin-bottom", height+10);
+    });
+</script>
+{% endblock %}

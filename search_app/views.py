@@ -2,7 +2,9 @@ from django.shortcuts import render
 from django.views.generic import ListView, TemplateView
 from account.models import GoulmetModel, OptionModel
 from myuser.models import CustomUser
+from calendar_app.models import Schedule
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 
 # Create your views here.
 class SearchView(TemplateView):

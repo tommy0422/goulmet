@@ -1,6 +1,10 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block header %}
+<h1 style="margin-top: 20px; margin-left: 30px;">お気に入り</h1>
+{% endblock %}
+
 {% block content %}
 <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
@@ -10,7 +14,7 @@
     <hr class="my-２">
     <p>お気に入りボタンを押したGoulmetがページに表示されます。</p>
     <a class="btn btn-warning btn-lg" style="color: rgb(0, 0, 0);" href="{% url 'search_app:search_form' %}" role="button">Goulmetを検索する</a>
-  </div>
+</div>
 <nav class="nav">
     <a style="text-decoration: none;" href="{% url 'search_app:search_form' %}" id="1" class="nav__link">
         <i class="material-icons nav__icon">search</i>
@@ -21,7 +25,7 @@
     <a style="text-decoration: none;" href="{% url 'reservation:reservation_confirm' %}" id="3" class="nav__link">
         <i class="material-icons nav__icon">calendar_today</i>
     </a>
-    <a style="text-decoration: none;" href="#" id="4" class="nav__link">
+    <a style="text-decoration: none;" href="{% url 'chat:chat_list' %}" id="4" class="nav__link">
         <i class="material-icons nav__icon">mail_outline</i>
     </a>
     <a style="text-decoration: none;" href="{% url 'account:user_update' %}" id="5" class="nav__link">

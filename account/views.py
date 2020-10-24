@@ -84,25 +84,28 @@ def judge_start(request):
 def goulmet_update(request):
     """Goulmet情報更新"""
     # urlを基に、GoulmetModelを取得
-    print(request.POST)
-    goulmet = get_object_or_404(GoulmetModel, user_id=request.session['_auth_user_id'])
+    user_id = CustomUser.objects.get(pk=request.session['_auth_user_id'])
+    if GoulmetModel.objects.filter(user_id=user_id).exists():
+        goulmet = GoulmetModel.objects.get(user_id=request.session['_auth_user_id'])
+        #フォームに、取得したGoulmetModelを紐付ける
+        form = GoulmetUpdateForm(request.POST or None, instance=goulmet)
 
-    #フォームに、取得したGoulmetModelを紐付ける
-    form = GoulmetUpdateForm(request.POST or None, instance=goulmet)
+        if goulmet.is_pass ==True:
+            # method = POST、つまり送信ボタン押下時、入力内容に問題なければ
+            if request.method == 'POST' and form.is_valid():
+                form.save()
+                return redirect('account:goulmet_detail')
 
-    if goulmet.is_pass ==True:
-        # method = POST、つまり送信ボタン押下時、入力内容に問題なければ
-        if request.method == 'POST' and form.is_valid():
-            form.save()
-            return redirect('account:goulmet_detail')
-
-        # 通常時のページアクセスや、入力内容に誤りがあればまたページを表示
-        context = {
-            'form': goulmet,
-        }
-        return render(request, 'account/goulmet_update.html', context)
+            # 通常時のページアクセスや、入力内容に誤りがあればまたページを表示
+            context = {
+                'form': goulmet,
+            }
+            return render(request, 'account/goulmet_update.html', context)
+        else:
+            return redirect('account:judge_start')
     else:
         return HttpResponse('あなたはまだGoulmetに認定されていません。')
+
 
 @login_required
 def goulmet_detail(request):

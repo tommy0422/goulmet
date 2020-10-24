@@ -40,7 +40,7 @@
     <div class="container">
         <form class="" action="" method="GET"> 
             <input type="text" class="form-control" placeholder="地域名を入力してください" name="keyword">
-            <input style="width: 100%; margin-top: 5px; border: 1px solid #ced4da;" type="datetime-local" name="" id="">
+            <!-- <input style="width: 100%; margin-top: 5px; border: 1px solid #ced4da;" type="date" name="date" id=""> -->
             <div style="text-align: center; margin-top: 10px;">
                 <input type="submit" value="検索">
             </div>
@@ -80,7 +80,7 @@
     <a style="text-decoration: none;" href="{% url 'reservation:reservation_confirm' %}" id="3" class="nav__link">
         <i class="material-icons nav__icon">calendar_today</i>
     </a>
-    <a style="text-decoration: none;" href="#" id="4" class="nav__link">
+    <a style="text-decoration: none;" href="{% url 'chat:chat_list' %}" id="4" class="nav__link">
         <i class="material-icons nav__icon">mail_outline</i>
     </a>
     <a style="text-decoration: none;" href="{% url 'account:user_update' %}" id="5" class="nav__link">

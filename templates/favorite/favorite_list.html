@@ -31,12 +31,15 @@
 </style>
 {% endblock %}
 
+{% block header %}
+<h1 style="margin-top: 20px; margin-left: 30px;">お気に入り</h1>
+{% endblock %}
+
 {% block content %}
 <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 </head>
 <div class="container">
-<h1 style="margin-top: 20px;">お気に入り</h1>
 {% for object in object_list %}
 <a style="text-decoration: none; color: #000000;" href="{% url 'search_app:goulmet_info' pk=object.pk %}">
     <div class="goulmet">
@@ -71,7 +74,7 @@
     <a style="text-decoration: none;" href="{% url 'reservation:reservation_confirm' %}" id="3" class="nav__link">
         <i class="material-icons nav__icon">calendar_today</i>
     </a>
-    <a style="text-decoration: none;" href="#" id="4" class="nav__link">
+    <a style="text-decoration: none;" href="{% url 'chat:chat_list' %}" id="4" class="nav__link">
         <i class="material-icons nav__icon">mail_outline</i>
     </a>
     <a style="text-decoration: none;" href="{% url 'account:user_update' %}" id="5" class="nav__link">
