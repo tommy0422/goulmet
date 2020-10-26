@@ -78,14 +78,14 @@ a:hover {
 </div>
 <div class="container">
 {% for object in object_list %}
-    <a style="text-decoration: none; color: #000000;" href="#">
+    <a style="text-decoration: none; color: #000000;" href="{% url 'chat:goulmet_chat' pk=object.pk %}">
         <div class="goulmet">
             <div class="goulmet_icon">
-                <img id="icon" src="{{object.goulmet_id.user_id.icon.url}}" alt="">
+                <img id="icon" src="{{object.user_id.icon.url}}" alt="">
             </div>
             <div class="goulmet_info">
                 <div style="text-align: center;">
-                    <h4>{{object.goulmet_id.user_id}}（{{object.goulmet_id.area}}）</h4>
+                    <h4>{{object.user_id}}</h4>
                 </div>
                 <hr>
                 <div style="text-align: right; font-size: 20px;">

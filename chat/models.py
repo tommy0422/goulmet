@@ -7,7 +7,7 @@ from reservation.models import OrderModel
 
 # Create your models here.
 class RoomModel(models.Model):
-    """チャットルーム"""
+    """チャットルームリスト"""
     user_id = models.ForeignKey(CustomUser,on_delete=models.CASCADE)
     goulmet_id = models.ForeignKey(GoulmetModel,on_delete=models.CASCADE)
     order_id = models.ForeignKey(OrderModel,on_delete=models.CASCADE)
@@ -18,10 +18,11 @@ class RoomModel(models.Model):
         return str(self.user_id.username) + '&' + str(self.goulmet_id.user_id) + ' ' + str(self.order_id.date)
 
 class ChatModel(models.Model):
+    """チャットルーム"""
     user_id = models.ForeignKey(CustomUser,on_delete=models.CASCADE,null=True)
     goulmet_id = models.ForeignKey(GoulmetModel,on_delete=models.CASCADE,null=True)
     room_id = models.ForeignKey(RoomModel,on_delete=models.CASCADE)
-    text = models.IntegerField('メッセージ')
+    text = models.CharField('メッセージ',max_length=1000)
     created_at = models.DateTimeField('作成日時',auto_now_add=True)
     updated_at = models.DateTimeField('更新日時',auto_now=True)
     

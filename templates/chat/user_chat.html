@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block customcss %}
+<link rel="stylesheet" href="{% static 'user_chat.css' %}">
+{% endblock %}
+
+{% block header %}
+<div class="header">
+    <h2>{{room_object.goulmet_id}}</h2>
+    <div>
+        <a style="color: black; margin-right: 15px;" href="{% url 'reservation:reservation_goulmet' pk=room_object.order_id.pk %}"><i class="fas fa-info-circle fa-2x"></i></a>
+        <a style="color: black;" href="{% url 'chat:user_chat' pk=room_object.pk %}"><i class="fa fa-refresh fa-2x" aria-hidden="true"></i></a>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-jJ2L/Ujk8jWEwtIXPFEk3X+f20QKnj4IIscn+JZzxqkbAUC79idDdiAhAi2E7czT" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+</head>
+<div class="container">
+    {% for item in object_list %}
+    <div class="box">
+        {% if item.user_id %}
+        <div class="icon">
+            <img class="icon" src="{{item.user_id.icon.url}}" alt="">
+        </div>
+        <div class="user-info">
+            <p><strong>{{item.user_id}}</strong> {{item.created_at}}</p>
+            <p class="user_chat">{{item.text}}</p>
+        </div>
+    </div>
+    {% else %}
+    <div class="box">
+        <div class="icon">
+            <img class="icon" src="{{item.goulmet_id.user_id.icon.url}}" alt="">
+        </div>
+        <div class="goulmet-info">
+            <p><strong>{{item.goulmet_id}}</strong> {{item.created_at}}</p>
+            <p class="goulmet_chat">{{item.text}}</p>
+        </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+</div>
+
+<div id="bms_send">
+    <form action="{% url 'chat:userchat_create' %}" method="POST">{% csrf_token %}
+        <textarea name="text" id="bms_send_message"></textarea>
+        <input type="hidden" name="room_id" value="{{room_object.pk}}">
+        <input id="bms_send_btn" type="submit" value="送信">
+    </form>
+</div>
+<nav class="nav">
+    <a style="text-decoration: none;" href="{% url 'search_app:search_form' %}" id="1" class="nav__link">
+        <i class="material-icons nav__icon">search</i>
+    </a>
+    <a style="text-decoration: none;" href="{% url 'favorite:favorite_list' %}" id="2" class="nav__link">
+        <i class="material-icons nav__icon">favorite</i>
+    </a>
+    <a style="text-decoration: none;" href="{% url 'reservation:reservation_confirm' %}" id="3" class="nav__link">
+        <i class="material-icons nav__icon">calendar_today</i>
+    </a>
+    <a style="text-decoration: none;" href="{% url 'chat:chat_list' %}" id="4" class="nav__link nav__link--active">
+        <i class="material-icons nav__icon">mail_outline</i>
+    </a>
+    <a style="text-decoration: none;" href="{% url 'account:user_update' %}" id="5" class="nav__link">
+        <i class="material-icons nav__icon">person</i>
+    </a>
+</nav>
+{% endblock %}
+
+{% block extrajs %}
+<script>
+    $(function() {
+        var height=$(".nav").height();
+        $("body").css("margin-bottom", height+58);
+    });
+</script>
+{% endblock %}

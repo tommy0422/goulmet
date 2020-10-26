@@ -78,7 +78,7 @@ a:hover {
 </div>
 <div class="container">
 {% for object in object_list %}
-    <a style="text-decoration: none; color: #000000;" href="#">
+    <a style="text-decoration: none; color: #000000;" href="{% url 'chat:user_chat' pk=object.pk %}">
         <div class="goulmet">
             <div class="goulmet_icon">
                 <img id="icon" src="{{object.goulmet_id.user_id.icon.url}}" alt="">
