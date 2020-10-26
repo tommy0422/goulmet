@@ -124,7 +124,7 @@ def reservation_goulmet(request,pk):
     object2 = OrderOption.objects.all().filter(order_id=pk)
     option_sum = 0
     for option in object2:
-        option_sum =+ option.option_id.price
+        option_sum += option.option_id.price
     sum = object.base_price + option_sum
     print(sum)
     return render(request, 'reservation/reservation_goulmet.html', {'object': object,'object2':object2,'sum':sum})

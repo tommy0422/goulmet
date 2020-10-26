@@ -27,7 +27,7 @@ class ChatModel(models.Model):
     updated_at = models.DateTimeField('更新日時',auto_now=True)
     
     def __str__(self):
-        if user_id:
-            return str(self.user_id) + ' ' + str(self.created_at)
+        if self.user_id:
+            return str(self.user_id.username) + ' ' + str(self.created_at)
         else:
-            return str(self.goulmet_id) + ' ' + str(self.created_at)
+            return str(self.goulmet_id.user_id) + ' ' + str(self.created_at)
