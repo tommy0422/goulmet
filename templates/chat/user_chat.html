@@ -24,7 +24,11 @@
     <div class="box">
         {% if item.user_id %}
         <div class="icon">
+            {% if item.user_id.icon %}
             <img class="icon" src="{{item.user_id.icon.url}}" alt="">
+            {% else %}
+            <img src="{% static 'img/no_icon.png' %}" alt="" id="preview">
+            {% endif %}
         </div>
         <div class="user-info">
             <p><strong>{{item.user_id}}</strong> {{item.created_at}}</p>
