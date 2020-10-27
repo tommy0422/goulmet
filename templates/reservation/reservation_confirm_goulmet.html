@@ -83,7 +83,11 @@ a:hover {
 {% for object in object_list %}
     <div class="goulmet">
         <div class="goulmet_icon">
+            {% if object.user_id.icon %}
             <img id="icon" src="{{object.user_id.icon.url}}" alt="">
+            {% else %}
+            <img id="icon" src="{% static 'img/no_icon.png' %}" alt="" id="preview">
+            {% endif %}
         </div>
         <div class="goulmet_info">
             <div style="text-align: center;">

@@ -84,7 +84,11 @@ a:hover {
 <a style="text-decoration: none; color: #000000;" href="{% url 'reservation:reservation_goulmet' pk=object.pk %}">
     <div class="goulmet">
         <div class="goulmet_icon">
+            {% if object.goulmet_id.user_id.icon %}
             <img id="icon" src="{{object.goulmet_id.user_id.icon.url}}" alt="">
+            {% else %}
+            <img id="icon" src="{% static 'img/no_icon.png' %}" alt="" id="preview">
+            {% endif %}
         </div>
         <div class="goulmet_info">
             <div style="text-align: center;">

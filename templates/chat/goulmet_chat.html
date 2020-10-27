@@ -26,7 +26,7 @@
             {% if item.user_id.icon %}
             <img class="icon" src="{{item.user_id.icon.url}}" alt="">
             {% else %}
-            <img src="{% static 'img/no_icon.png' %}" alt="" id="preview">
+            <img class="icon" src="{% static 'img/no_icon.png' %}" alt="" id="preview">
             {% endif %}
         </div>
         <div class="user-info">
@@ -40,7 +40,7 @@
             {% if item.goulmet_id.user_id.icon %}
             <img class="icon" src="{{item.goulmet_id.user_id.icon.url}}" alt="">
             {% else %}
-            <img src="{% static 'img/no_icon.png' %}" alt="" id="preview">
+            <img class="icon" src="{% static 'img/no_icon.png' %}" alt="" id="preview">
             {% endif %}
         </div>
         <div class="goulmet-info">

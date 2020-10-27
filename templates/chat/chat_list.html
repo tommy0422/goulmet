@@ -84,7 +84,7 @@ a:hover {
                 {% if object.goulmet_id.user_id.icon %}
                 <img id="icon" src="{{object.goulmet_id.user_id.icon.url}}" alt="">
                 {% else %}
-                <img src="{% static 'img/no_icon.png' %}" alt="" id="preview">
+                <img id="icon" src="{% static 'img/no_icon.png' %}" alt="" id="preview">
                 {% endif %}
             </div>
             <div class="goulmet_info">
