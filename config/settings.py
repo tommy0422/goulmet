@@ -34,7 +34,6 @@ INSTALLED_APPS = [
     'reservation',
     'favorite',
     'chat',
-    'social_django'
 ]
 
 AUTH_USER_MODEL = 'myuser.CustomUser'
@@ -64,8 +63,6 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'social_django.context_processors.backends',  
-                'social_django.context_processors.login_redirect', 
             ],
         },
     },
@@ -83,11 +80,6 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
-AUTHENTICATION_BACKENDS = (
-    'social_core.backends.google.GoogleOAuth2',  # for Google authentication
-    'django.contrib.auth.backends.ModelBackend',
-)
 
 
 # Password validation

@@ -7,7 +7,6 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('register.urls')),
-    path('auth/', include('social_django.urls', namespace='social')),
     path('account/', include('account.urls')),
     path('calendar/',include('calendar_app.urls')),
     path('search/',include('search_app.urls')),
