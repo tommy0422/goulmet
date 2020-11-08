@@ -13,7 +13,7 @@
 <div class="container">
     <div class="mt-5">
         <div class="icon_name">
-            {% if object.user_id.icon %}
+            {% if object.goulmet_id.user_id.icon %}
                 <img style="margin-right: 50px;" id="icon" src="{{object.goulmet_id.user_id.icon.url}}" alt="" id="preview">
             {% else %}
                 <img style="margin-right: 50px;" id="icon" src="{% static 'img/no_icon.png' %}" alt="" id="preview">
