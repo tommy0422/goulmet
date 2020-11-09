@@ -76,8 +76,12 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'a19b5451b628be3a3623e3f1443588fa',
+        'USER': 'a19b5451b628be3a3623e3f1443588fa', 
+        'PASSWORD': 'Skyhand0422!', # DBへ接続するユーザIDのパスワードを設定
+        'HOST': 'mysql-2.mc.lolipop.lan',
+        'PORT': '3306',
     }
 }
 
