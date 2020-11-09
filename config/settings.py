@@ -14,7 +14,7 @@ SECRET_KEY = '14+%etlfz+l3m!sj^i-f-(*u&z4@&!vdso&s#rn04^+y$x9ou1'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['https://goulmet.lolipop.io','192.168.179.7','localhost']
 
 
 # Application definition
@@ -78,8 +78,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'Goulmet',
-        'USER': 'root',
-        'PASSWORD': '',
+        'USER': 'yosuke_tomii',
+        'PASSWORD': 'skyhand0422',
     }
 }
 
